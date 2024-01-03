@@ -14,7 +14,7 @@ import { CanDeactivateGuard } from './servers/edit-server/can-deactivate-guard.s
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'header', component: HeaderComponent, pathMatch: "prefix"},
+  {path: 'header', component: HeaderComponent},
   {path: 'users', component: UsersComponent, children: [
     {path: ':id/:name', component: UserComponent}
   ]},
@@ -25,7 +25,7 @@ const routes: Routes = [
   {path: 'not-found', component: PageNotFoundComponent, data: {message: 'Page not found!'}},
   {path: '**', redirectTo: '/not-found'}
   
-]
+] 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

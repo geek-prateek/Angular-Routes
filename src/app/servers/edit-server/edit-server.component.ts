@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServersService } from '../servers.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CanComponentDeactivate } from './can-deactivate-guard.service';
 import { Observable } from 'rxjs';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-server',
@@ -10,11 +11,18 @@ import { Observable } from 'rxjs';
   styleUrls: ['./edit-server.component.css']
 })
 export class EditServerComponent implements OnInit, CanComponentDeactivate {
+  @ViewChild('f') editForm: NgForm;
   server: { id: number; name: string; status: string; };
   serverName = '';
   serverStatus = '';
   allowEdit = false;
   changesSaved = false;
+  defaultSelect = "offline";
+  user ={
+    serverName: '',
+    status: '',
+  }
+  showData: boolean = false;
 
   constructor(private serversService: ServersService, private route : ActivatedRoute, private router: Router) { }
 
@@ -34,9 +42,13 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
   }
  
   onUpdateServer(){
+    this.showData = true;
+    this.user.serverName = this.editForm.value.name;
+    this.user.status = this.editForm.value.status;
+    console.log(this.editForm);
     this.serversService.updateServer(this.server.id, {name: this.serverName, status: this.serverStatus});
     this.changesSaved = true;
-    this.router.navigate(['../'], {relativeTo: this.route}); 
+    //this.router.navigate(['../'], {relativeTo: this.route}); 
   } 
 
   canDeactivate(): boolean | Promise<boolean> | Observable<boolean>{

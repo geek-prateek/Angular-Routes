@@ -16,7 +16,6 @@ export class AuthGuardService implements CanActivate, CanActivateChild{
             }else{
                 alert("No Access !");
                 return false;
-                
             }
         })
     }
@@ -24,5 +23,5 @@ export class AuthGuardService implements CanActivate, CanActivateChild{
     canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
         return this.canActivate(childRoute, state);
     }
-     
+      
 }

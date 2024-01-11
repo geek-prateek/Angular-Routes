@@ -15,6 +15,7 @@ import { CanDeactivateGuard } from './servers/edit-server/can-deactivate-guard.s
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'header', component: HeaderComponent},
+  
   {path: 'users', component: UsersComponent, children: [
     {path: ':id/:name', component: UserComponent}
   ]},

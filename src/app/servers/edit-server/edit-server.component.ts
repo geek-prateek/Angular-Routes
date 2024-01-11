@@ -41,14 +41,18 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
     this.serverStatus = this.server.status;
   }
  
-  onUpdateServer(){
+  onUpdateServer(f: NgForm){
     this.showData = true;
     this.user.serverName = this.editForm.value.name;
     this.user.status = this.editForm.value.status;
+    
     console.log(this.editForm);
     this.serversService.updateServer(this.server.id, {name: this.serverName, status: this.serverStatus});
     this.changesSaved = true;
-    //this.router.navigate(['../'], {relativeTo: this.route}); 
+    this.editForm.reset();
+    //this.router.navigate(['../'], {relativeTo: this.route});
+    
+    
   } 
 
   canDeactivate(): boolean | Promise<boolean> | Observable<boolean>{
